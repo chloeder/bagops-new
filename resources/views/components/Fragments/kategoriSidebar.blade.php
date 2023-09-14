@@ -1,5 +1,5 @@
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">
+                  <li class="nav-item {{ Route::is('kategori*') ? 'menu-open' : '' }}">
+                      <a href="#" class="nav-link {{ Route::is('kategori*') ? 'active' : '' }}">
                           <i class="nav-icon fa-solid fa-folder"></i>
                           <p>
                               Kategori Berkas
@@ -7,16 +7,18 @@
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <a href="{{ route('kategori.rutin') }}" class="nav-link">
+                          <li class="nav-item {{ Route::is('kategori.rutin') ? 'menu-open' : '' }}">
+                              <a href="{{ route('kategori.rutin') }}"
+                                  class="nav-link {{ Route::is('kategori.rutin') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Laporan Rutin</p>
+                                  <p>Pelaporan Rutin</p>
                               </a>
                           </li>
-                          <li class="nav-item">
-                              <a href="{{ route('kategori.non.rutin') }}" class="nav-link">
+                          <li class="nav-item {{ Route::is('kategori.non.rutin') ? 'menu-open' : '' }}">
+                              <a href="{{ route('kategori.non.rutin') }}"
+                                  class="nav-link {{ Route::is('kategori.non.rutin') ? 'active' : '' }}">
                                   <i class="far fa-circle nav-icon"></i>
-                                  <p>Laporan Non Rutin</p>
+                                  <p>Pelaporan Non Rutin</p>
                               </a>
                           </li>
                       </ul>

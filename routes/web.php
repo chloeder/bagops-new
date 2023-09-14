@@ -31,12 +31,16 @@ Route::put('/admin/berkas-pelaporan/edit/{id}', [DashboardController::class, 'up
 Route::delete('/admin/berkas-pelaporan/delete/{id}', [DashboardController::class, 'deleteBerkasPelaporan'])->name('delete.berkas.pelaporan')->middleware('auth');
 
 Route::get('/admin/laporan/laporan-kinerja', [DashboardController::class, 'laporanKinerja'])->name('laporan.kinerja')->middleware('auth');
+Route::get('/admin/laporan/laporan-kinerja/profile-polsek/{id}', [DashboardController::class, 'profilePolsek'])->name('profile.polsek')->middleware('auth');
 Route::get('/admin/laporan/laporan-berkas', [DashboardController::class, 'laporanBerkas'])->name('laporan.berkas')->middleware('auth');
+
+Route::get('/admin/daftar-user', [DashboardController::class, 'daftarUser'])->name('daftar.user')->middleware('auth');
 
 // Operator
 Route::get('/masukkan-laporan', [DashboardController::class, 'masukkanLaporan'])->name('masukkan.laporan')->middleware('auth');
 Route::post('/masukkan-laporan', [DashboardController::class, 'masukkanLaporanPost'])->name('masukkan.laporan.post')->middleware('auth');
 Route::get('/daftar-laporan', [DashboardController::class, 'daftarLaporan'])->name('daftar.laporan')->middleware('auth');
+Route::get('/daftar-laporan/detail/{id}', [DashboardController::class, 'detailLaporan'])->name('detail.laporan')->middleware('auth');
 Route::get('/kinerja-satuan', [DashboardController::class, 'kinerjaSatuan'])->name('kinerja.satuan')->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

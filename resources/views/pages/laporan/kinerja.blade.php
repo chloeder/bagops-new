@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1>Laporan Kinerja</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item active">Laporan Kinerja</li>
                     </ol>
                 </div>
             </div>
@@ -31,49 +31,55 @@
                     <div class="col-md-4">
 
                         <!-- Widget: user widget style 2 -->
-                        <div class="card card-widget widget-user-2">
-                            <!-- Add the bg color to the header using any of the bg-* classes -->
-                            <div class="widget-user-header bg-secondary">
-                                <div class="widget-user-image">
-                                    <img class="img-circle elevation-2" src="{{ asset('img/presisi.png') }}"
-                                        alt="User Avatar">
+                        <a href="{{ route('profile.polsek', $u->id) }}">
+                            <div class="card card-widget widget-user-2">
+                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                <div class="widget-user-header bg-secondary">
+                                    <div class="widget-user-image">
+                                        <img class="img-circle elevation-2" src="{{ asset('img/presisi.png') }}"
+                                            alt="User Avatar">
+                                    </div>
+                                    <!-- /.widget-user-image -->
+                                    <h3 class="widget-user-username">{{ $u->satker->nama }}</h3>
+                                    {{-- <h5 class="widget-user-desc">{{ $s->user->nama }}</h5> --}}
                                 </div>
-                                <!-- /.widget-user-image -->
-                                <h3 class="widget-user-username">{{ $u->satker->nama }}</h3>
-                                {{-- <h5 class="widget-user-desc">{{ $s->user->nama }}</h5> --}}
+                                <div class="card-footer p-0">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <span href="#" class="nav-link text-bold">
+                                                Berkas Dimasukkan <span
+                                                    class="float-right align-middle btn btn-xs bg-gradient-info">{{ $u->berkas->count() }}
+                                                    Berkas</span>
+                                            </span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span href="#" class="nav-link text-bold">
+                                                Berkas Valid <span
+                                                    class="float-right align-middle btn btn-xs bg-gradient-success ">{{ $u->berkas->where('status', 'Valid')->count() }}
+                                                    Berkas
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="nav-item">
+                                            <span href="#" class="nav-link text-bold">
+                                                Berkas Terlambat <span
+                                                    class="float-right align-middle btn btn-xs bg-gradient-warning">{{ $u->berkas->where('status', 'Terlambat')->count() }}
+                                                    Berkas
+                                                </span>
+                                            </span>
+                                        </li>
+                                        <li class="nav-item ">
+                                            <span href="#" class="nav-link text-bold">
+                                                Berkas Tidak Valid <span
+                                                    class="float-right align-middle btn btn-xs bg-gradient-danger">{{ $u->berkas->where('status', 'Tidak Valid')->count() }}
+                                                    Berkas
+                                                </span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="card-footer p-0">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <span href="#" class="nav-link text-bold">
-                                            Berkas Dimasukkan <span
-                                                class="float-right badge bg-info">{{ $u->berkas->count() }} Berkas</span>
-                                        </span>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span href="#" class="nav-link text-bold">
-                                            Berkas Valid <span
-                                                class="float-right badge bg-success text-bold">{{ $u->berkas->where('status', 'Valid')->count() }}
-                                                Berkas</span>
-                                        </span>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span href="#" class="nav-link text-bold">
-                                            Berkas Terlambat <span
-                                                class="float-right badge bg-warning">{{ $u->berkas->where('status', 'Terlambat')->count() }}
-                                                Berkas</span>
-                                        </span>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span href="#" class="nav-link text-bold">
-                                            Berkas Tidak Valid <span
-                                                class="float-right badge bg-danger">{{ $u->berkas->where('status', 'Tidak Valid')->count() }}
-                                                Berkas</span>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        </a>
                         <!-- /.widget-user -->
 
                         <!-- /.card -->

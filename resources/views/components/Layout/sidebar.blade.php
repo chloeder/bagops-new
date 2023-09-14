@@ -28,8 +28,8 @@
                   <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                  <li class="nav-item menu-open">
-                      <a href="{{ route('dashboard') }}" class="nav-link active">
+                  <li class="nav-item  {{ Route::is('dashboard') ? 'menu-open' : '' }}">
+                      <a href="{{ route('dashboard') }}" class="nav-link {{ Route::is('dashboard') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
                               Dashboard
@@ -46,11 +46,11 @@
                       @include(' components.Fragments.laporanSidebar')
                       {{-- Pengaturan --}}
                       @include('components.Fragments.pengaturanSidebar')
-                  @endif
-
-                  @if (Auth::user()->role_id == 2)
+                  @else
                       @include('components.Fragments.userBerkasSidebar')
                   @endif
+
+
 
                   <li class="nav-item">
                       <a href="{{ route('logout') }}" class="nav-link">

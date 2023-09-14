@@ -74,4 +74,14 @@ class User extends Authenticatable
   {
     return $this->hasMany(Berkas::class, 'user_id', 'id');
   }
+
+  /**
+   * Get all of the laporan for the User
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\HasMany
+   */
+  public function laporan(): HasMany
+  {
+    return $this->hasMany(Laporan::class, 'user_id', 'id');
+  }
 }

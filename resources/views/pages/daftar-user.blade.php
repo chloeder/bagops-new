@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Pelaporan Rutin</h1>
+                    <h1>Akun Pengguna</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item active">Pelaporan Rutin</li>
+                        <li class="breadcrumb-item active">Akun Pengguna</li>
                     </ol>
                 </div>
             </div>
@@ -35,40 +35,25 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Berkas</th>
-                                        <th>Judul Berkas</th>
-                                        <th>Penginput Berkas</th>
-                                        <th>Kategori Berkas</th>
+                                        <th>Nama Akun</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
                                         <th>Status</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($rutin as $r)
+                                    @foreach ($user as $u)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $r->kode_berkas }}</td>
-                                            <td>{{ $r->judul }}</td>
-                                            <td>{{ $r->user->nama }}</td>
-                                            <td>{{ $r->kategori->nama }}</td>
+                                            <td>{{ $u->nama }}</td>
+                                            <td>{{ $u->username }}</td>
+                                            <td>{{ $u->email }}</td>
                                             <td>
-                                                @if ($r->status == 'Diproses')
-                                                    <span class="badge badge-secondary">{{ $r->status }}</span>
-                                                @elseif($r->status == 'Valid')
-                                                    <span class="badge badge-success">{{ $r->status }}</span>
-                                                @elseif($r->status == 'Tidak Valid')
-                                                    <span class="badge badge-danger">{{ $r->status }}</span>
+                                                @if ($u->status == 'active')
+                                                    <span class="badge badge-success">Aktif</span>
                                                 @else
-                                                    <span class="badge badge-warning">{{ $r->status }}</span>
+                                                    <span class="badge badge-danger">Inactive</span>
                                                 @endif
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-primary btn-sm"
-                                                    href="{{ route('detail.berkas.pelaporan', $r->id) }}">
-                                                    <i class="fas fa-eye">
-                                                    </i>
-                                                    Detail
-                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -76,12 +61,10 @@
                                 <tfoot>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Berkas</th>
-                                        <th>Judul Berkas</th>
-                                        <th>Penginput Berkas</th>
-                                        <th>Kategori Berkas</th>
+                                        <th>Nama Akun</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
                                         <th>Status</th>
-                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>

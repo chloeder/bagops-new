@@ -18,15 +18,25 @@ class DashboardController extends Controller
 {
   function dashboard()
   {
+    $berkas = Berkas::select(DB::raw('COUNT(*) as count'), DB::raw("MONTHNAME(created_at) as month"))
+      ->whereYear('created_at', date('Y'))
+      ->groupBy(DB::raw('Monthname(created_at)'))
+      ->pluck('count', 'month');
+    $labels = $berkas->keys();
+    $data = $berkas->values();
 
-    return view('pages.dashboard');
+    $totalBerkas = Berkas::all();
+    $history = Berkas::latest()->take(15)->get();
+    // dd($history);
+    return view('pages.dashboard', compact('labels', 'data', 'totalBerkas', 'history'));
   }
 
   // // // // Admin // // // //
   // Kategori
   function kategoriRutin()
   {
-    $rutin = Berkas::where('kategori_id', 1)->get();
+    $rutin = Berkas::with('laporan')->where('kategori_id', 1)->get();
+    // dd($rutin);
     return view('pages.kategori.rutin', compact('rutin'));
   }
 
@@ -103,11 +113,25 @@ class DashboardController extends Controller
     return view('pages.laporan.kinerja', compact('user'));
   }
 
+  function profilePolsek($id)
+  {
+    $user = User::findOrFail($id);
+    $berkas = Berkas::latest()->take(15)->where('user_id', $id)->get();
+    return view('pages.laporan.profile-polsek', compact('user', 'berkas'));
+  }
+
   function laporanBerkas()
   {
     $laporan = Laporan::all();
     $berkas = Berkas::all();
     return view('pages.laporan.berkas', compact('laporan', 'berkas'));
+  }
+
+  // User
+  function daftarUser()
+  {
+    $user = User::all();
+    return view('pages.daftar-user', compact('user'));
   }
 
 
@@ -169,8 +193,16 @@ class DashboardController extends Controller
     return view('pages.operator.daftar-laporan', compact('berkas'));
   }
 
+  function detailLaporan($id)
+  {
+    $berkas = Berkas::findOrFail($id);
+    $laporan = Laporan::where('berkas_id', $id)->first();
+    return view('pages.operator.detail-laporan', compact('berkas', 'laporan'));
+  }
+
   function kinerjaSatuan()
   {
-    return view('pages.operator.kinerja-satuan');
+    $berkas = Berkas::where('user_id', auth()->user()->id)->get();
+    return view('pages.operator.kinerja-satuan', compact('berkas'));
   }
 }

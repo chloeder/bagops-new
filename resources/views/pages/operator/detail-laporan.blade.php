@@ -79,17 +79,17 @@
                     </div>
                     <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                         <h3 class="text-primary"><i class="fas fa-file-signature"></i> {{ $berkas->judul }}</h3>
-                        <p class="text-muted">Deskripsi : {{ $berkas->keterangan }}</p>
+                        <p class="text-muted text-md">Deskripsi : {{ $berkas->keterangan }}</p>
                         <br>
                         <div class="text-muted">
                             <p class="text-sm">Penginput :
-                                <b class="d-block">{{ $berkas->user->nama }}</b>
+                                <b class="d-block text-md">{{ $berkas->user->nama }}</b>
                             </p>
                             <p class="text-sm">Pemimpin Lapangan :
-                                <b class="d-block">{{ $berkas->pemimpin_lapangan }}</b>
+                                <b class="d-block text-md">{{ $berkas->pemimpin_lapangan }}</b>
                             </p>
                             <p class="text-sm">Status Berkas :
-                                <b class="d-block">
+                                <b class="d-block text-md">
                                     @if ($berkas->status == 'Diproses')
                                         <span class="badge badge-secondary">{{ $berkas->status }}</span>
                                     @elseif($berkas->status == 'Valid')
@@ -103,13 +103,20 @@
                             </p>
                             @if ($laporan == null)
                                 <p class="text-sm">Pemeriksa Berkas :
-                                    <b class="d-block">Belum Diperiksa</b>
+                                    <b class="d-block text-md">Belum Diperiksa</b>
                                 </p>
                             @else
                                 <p class="text-sm">Pemeriksa Berkas :
-                                    <b class="d-block">{{ $laporan->user->nama }}</b>
+                                    <b class="d-block text-md">{{ $laporan->user->nama }}</b>
                                 </p>
                             @endif
+                            <p class="text-sm">Tanggapan :
+                                <b class="d-block text-md">
+                                    @foreach ($berkas->laporan as $item)
+                                        {{ $item->tanggapan }}
+                                    @endforeach
+                                </b>
+                            </p>
                         </div>
 
                         <h5 class="mt-5 text-muted">Lampiran File</h5>
@@ -119,7 +126,7 @@
                                     {{ $berkas->file }}</a>
                             </li>
                         </ul>
-                        <form action="{{ route('update.status.berkas', $berkas->id) }}" method="post">
+                        {{-- <form action="{{ route('update.status.berkas', $berkas->id) }}" method="post">
                             @csrf
                             @method('PUT')
 
@@ -135,7 +142,7 @@
                                     <input type="submit" class="btn btn-sm btn-warning" name="status" value="Terlambat">
                                 </div>
                             @endif
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>

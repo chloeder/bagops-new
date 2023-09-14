@@ -44,6 +44,7 @@
                                         <th>Tanggal Laporan</th>
                                         <th>Pemimpin Lapangan</th>
                                         <th>Status Berkas</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +55,25 @@
                                             <td>{{ $b->judul }}</td>
                                             <td>{{ $b->tanggal_laporan }}</td>
                                             <td>{{ $b->pemimpin_lapangan }}</td>
-                                            <td><span class="badge badge-secondary">{{ $b->status }}</span></td>
+                                            <td>
+                                                @if ($b->status == 'Diproses')
+                                                    <span class="badge badge-secondary">{{ $b->status }}</span>
+                                                @elseif($b->status == 'Valid')
+                                                    <span class="badge badge-success">{{ $b->status }}</span>
+                                                @elseif($b->status == 'Tidak Valid')
+                                                    <span class="badge badge-danger">{{ $b->status }}</span>
+                                                @else
+                                                    <span class="badge badge-warning">{{ $b->status }}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{{ route('detail.laporan', $b->id) }}">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                    Detail
+                                                </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -66,6 +85,7 @@
                                         <th>Tanggal Laporan</th>
                                         <th>Pemimpin Lapangan</th>
                                         <th>Status Berkas</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
