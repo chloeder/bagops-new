@@ -21,6 +21,7 @@ class DashboardController extends Controller
     $berkas = Berkas::select(DB::raw('COUNT(*) as count'), DB::raw("MONTHNAME(created_at) as month"))
       ->whereYear('created_at', date('Y'))
       ->groupBy(DB::raw('Monthname(created_at)'))
+      ->orderBy('created_at', 'ASC')
       ->pluck('count', 'month');
     $labels = $berkas->keys();
     $data = $berkas->values();

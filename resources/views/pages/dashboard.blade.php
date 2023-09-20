@@ -115,9 +115,8 @@
 
                                     <div class="chart">
                                         <!-- Sales Chart Canvas -->
-                                        <canvas id="barChart"
+                                        <canvas id="lineChart"
                                             style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                                        {{-- <canvas id="salesChart" height="180" style="height: 180px;"></canvas> --}}
                                     </div>
                                     <!-- /.chart-responsive -->
                                 </div>
@@ -367,33 +366,49 @@
             labels: labels,
             datasets: [{
                 label: 'Total Berkas',
-                backgroundColor: 'rgba(60,141,188,0.9)',
+                backgroundColor: '#fff',
                 borderColor: 'rgba(60,141,188,0.8)',
-                pointRadius: false,
-                pointColor: '#3b8bba',
+                pointRadius: 5,
+                pointColor: '#ffffff',
                 pointStrokeColor: 'rgba(60,141,188,1)',
-                pointHighlightFill: '#fff',
+                pointHighlightFill: '#ffffff',
                 pointHighlightStroke: 'rgba(60,141,188,1)',
                 data: data
             }, ]
         }
-        //-------------
-        //- BAR CHART -
-        //-------------
-        var barChartCanvas = $('#barChart').get(0).getContext('2d')
-        var barChartData = $.extend(true, {}, areaChartData)
-        var temp0 = areaChartData.datasets[0]
 
-        var barChartOptions = {
-            responsive: true,
+        var areaChartOptions = {
             maintainAspectRatio: false,
-            datasetFill: false
+            responsive: true,
+            legend: {
+                display: true
+            },
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: true,
+                    }
+                }],
+                yAxes: [{
+                    gridLines: {
+                        display: true,
+                    }
+                }]
+            }
         }
+        //-------------
+        //- LINE CHART -
+        //--------------
+        var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+        var lineChartOptions = $.extend(true, {}, areaChartOptions)
+        var lineChartData = $.extend(true, {}, areaChartData)
+        lineChartData.datasets[0].fill = false;
+        lineChartOptions.datasetFill = false
 
-        new Chart(barChartCanvas, {
-            type: 'bar',
-            data: barChartData,
-            options: barChartOptions
+        var lineChart = new Chart(lineChartCanvas, {
+            type: 'line',
+            data: lineChartData,
+            options: lineChartOptions
         })
     </script>
 @endpush
