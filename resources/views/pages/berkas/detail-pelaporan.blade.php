@@ -88,6 +88,9 @@
                             <p class="text-sm">Pemimpin Lapangan :
                                 <b class="d-block">{{ $berkas->pemimpin_lapangan }}</b>
                             </p>
+                            <p class="text-sm">Tanggal Dimasukkan :
+                                <b class="d-block">{{ $berkas->created_at }}</b>
+                            </p>
                             <p class="text-sm">Status Berkas :
                                 <b class="d-block">
                                     @if ($berkas->status == 'Diproses')

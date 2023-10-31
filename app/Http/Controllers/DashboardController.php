@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
@@ -119,6 +120,22 @@ class DashboardController extends Controller
     $user = User::findOrFail($id);
     $berkas = Berkas::latest()->take(15)->where('user_id', $id)->get();
     return view('pages.laporan.profile-polsek', compact('user', 'berkas'));
+  }
+
+  function updateProfilePolsek(Request $request, $id)
+  {
+    $request->validate([
+      'new_password' => 'required|min:8|confirmed',
+    ], [
+      'new_password.required' => 'Password tidak boleh kosong',
+      'new_password.min' => 'Password minimal 8 karakter',
+      'new_password.confirmed' => 'Password tidak sesuai',
+    ]);
+    $user = User::findOrFail($id);
+    $user->update([
+      'password' => Hash::make($request->new_password)
+    ]);
+    return redirect()->route('laporan.kinerja')->with('success', 'Profile berhasil diupdate');
   }
 
   function laporanBerkas()

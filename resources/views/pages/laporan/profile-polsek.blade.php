@@ -145,41 +145,45 @@
                                     <!-- /.post -->
                                 </div>
                                 <div class="tab-pane" id="settings">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="{{ route('update.profile.polsek', $user->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('PUT')
                                         <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputName"
-                                                    placeholder="Name">
+                                                <input type="text" class="form-control bg-secondary text-secondary"
+                                                    id="nama" name="nama" value="{{ $user->nama }}" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                            <label for="email" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputEmail"
-                                                    placeholder="Email">
+                                                <input type="email" class="form-control bg-secondary text-secondary"
+                                                    id="email" name="email" value="{{ $user->email }}" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                                            <label for="new_password" class="col-sm-2 col-form-label">Password</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputName2"
-                                                    placeholder="Name">
+                                                <input type="password"
+                                                    class="form-control @error('new_password') is-invalid @enderror"
+                                                    id="new_password" name="new_password" placeholder="Password">
+                                                @error('new_password')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                                            <label for="new_password_confirmation" class="col-sm-2 col-form-label">
+                                                Konfirmasi Password</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                                <input type="password" class="form-control"
+                                                    id="new_password_confirmation" name="new_password_confirmation"
+                                                    placeholder="Konfirmasi Password">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="inputSkills"
-                                                    placeholder="Skills">
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row">
                                             <div class="offset-sm-2 col-sm-10">
                                                 <button type="submit" class="btn btn-danger">Submit</button>

@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template') }}/dist/css/adminlte.min.css">
+    {{-- Favicon --}}
+    <link rel="shortcut icon" href="{{ asset('/img/bagops.png') }}" type="image/x-icon">
     {{-- data table --}}
     @stack('css')
 </head>
