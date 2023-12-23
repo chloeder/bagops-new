@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware(['auth',]);
 
 // Admin
-Route::middleware('role_admin')->group(function () {
+Route::middleware(['auth', 'role_admin'])->group(function () {
   Route::get('/admin/kategori/laporan-rutin', [DashboardController::class, 'kategoriRutin'])->name('kategori.rutin');
   Route::get('/admin/kategori/laporan-non-rutin', [DashboardController::class, 'kategoriNonRutin'])->name('kategori.non.rutin');
 
@@ -40,7 +40,7 @@ Route::middleware('role_admin')->group(function () {
 });
 
 // Operator
-Route::middleware('role_user')->group(function () {
+Route::middleware(['auth', 'role_user'])->group(function () {
   Route::get('/masukkan-laporan', [DashboardController::class, 'masukkanLaporan'])->name('masukkan.laporan');
   Route::post('/masukkan-laporan', [DashboardController::class, 'masukkanLaporanPost'])->name('masukkan.laporan.post');
   Route::get('/daftar-laporan', [DashboardController::class, 'daftarLaporan'])->name('daftar.laporan');
